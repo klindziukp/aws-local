@@ -1,0 +1,23 @@
+spring:
+  data:
+    r2dbc:
+      repositories:
+        enabled: true
+  r2dbc:
+    driver: postgresql
+    url: r2dbc:postgresql://127.0.0.1:5432/file_info
+    username: postgres
+    password: postgres
+    pool:
+      enabled: true
+      initial-size: 5
+
+config:
+  aws:
+    region: us-east-1
+    s3:
+      url: http://127.0.0.1:4566
+      bucket-name: dandelion-s3-bucket
+      access-key: localstack
+      secret-key: localstack
+

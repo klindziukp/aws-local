@@ -1,0 +1,5 @@
+rootProject.name = 'aws.local'
+include 'aws-s3'
+include 'aws-sns-sqs'
+include 'aws-s3'
+
