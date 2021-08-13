@@ -37,6 +37,7 @@ public class AwsS3Service {
     log.info("Uploading file '{}' to bucket: '{}' ", fileName, awsS3Config.getBucketName());
     ByteArrayInputStream byteArrayInputStream = new ByteArrayInputStream(fileData);
     ObjectMetadata objectMetadata = new ObjectMetadata();
+    objectMetadata.setContentLength(fileData.length);
     String fileUrl =
         awsS3Config.getS3EndpointUrl() + "/" + awsS3Config.getBucketName() + "/" + fileName;
     PutObjectResult putObjectResult =

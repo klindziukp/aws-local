@@ -6,9 +6,9 @@ package com.klindziuk.aws.local.s3.repository;
 
 import com.klindziuk.aws.local.s3.domain.FileInfo;
 import org.springframework.data.repository.reactive.ReactiveCrudRepository;
-import reactor.core.publisher.Mono;
+import reactor.core.publisher.Flux;
 
 public interface FileInfoRepository extends ReactiveCrudRepository<FileInfo, Long> {
 
-  Mono<FileInfo> findByFileName(String name);
+  Flux<FileInfo> findByFileName(String name);
 }

@@ -43,7 +43,7 @@ public class AwsS3Handler {
   @NonNull
   public Mono<ServerResponse> fileInfoFromDb(ServerRequest request) {
     final String fileName = request.pathVariable(PathVariableParam.NAME);
-    Mono<FileInfo> fileInfo = fileInfoService.getFileByName(fileName);
+    Flux<FileInfo> fileInfo = fileInfoService.getFileByName(fileName);
     return ok().contentType(APPLICATION_JSON)
         .body(fileInfo, FileInfo.class)
         .switchIfEmpty(ServerResponse.notFound().build());
@@ -77,6 +77,9 @@ public class AwsS3Handler {
                             String fileName = pFilePart.filename();
                             return pFilePart
                                 .content()
+                                .filter(
+                                    pDataBuffer ->
+                                        new byte[pDataBuffer.readableByteCount()].length > 0)
                                 .flatMap(
                                     pDataBuffer -> {
                                       log.info("Upload file '{}' started", fileName);

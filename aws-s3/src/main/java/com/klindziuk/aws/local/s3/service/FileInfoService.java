@@ -10,7 +10,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import reactor.core.publisher.Flux;
-import reactor.core.publisher.Mono;
 
 @Service
 @Slf4j
@@ -25,10 +24,7 @@ public class FileInfoService {
 
   public Flux<FileInfo> saveFilesInfo(Flux<FileInfo> fileInfo) {
     log.info("Saving file info: '{}'", fileInfo);
-    fileInfoRepository
-        .saveAll(fileInfo)
-        .subscribe(result -> log.info("Files info '{}' saved successfully", fileInfo));
-    return fileInfo.flatMap(fI -> fileInfoRepository.findByFileName(fI.getFileName()));
+    return fileInfoRepository.saveAll(fileInfo);
   }
 
   public Flux<FileInfo> findAllFiles() {
@@ -36,7 +32,7 @@ public class FileInfoService {
     return fileInfoRepository.findAll();
   }
 
-  public Mono<FileInfo> getFileByName(String fileName) {
+  public Flux<FileInfo> getFileByName(String fileName) {
     log.info("Retrieving file by name '{}'", fileName);
     return fileInfoRepository.findByFileName(fileName);
   }
