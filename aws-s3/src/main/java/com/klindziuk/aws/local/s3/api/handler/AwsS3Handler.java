@@ -61,6 +61,12 @@ public class AwsS3Handler {
   }
 
   @NonNull
+  public Mono<ServerResponse> gatlingSaveInfo(ServerRequest request) {
+    return ok().contentType(APPLICATION_JSON)
+        .body(Flux.fromIterable(awsS3Service.listObjects()), S3ObjectSummary.class);
+  }
+
+  @NonNull
   public Mono<ServerResponse> upload2S3(ServerRequest request) {
     return request
         .multipartData()

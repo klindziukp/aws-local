@@ -1,0 +1,15 @@
+plugins {
+    id 'java'
+}
+
+group 'com.klindziuk'
+version '0.0.1-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation group: 'com.github.derjust', name: 'spring-data-dynamodb', version: '5.1.0'
+    implementation group: 'com.amazonaws', name: 'aws-java-sdk-dynamodb', version: '1.12.42'
+}

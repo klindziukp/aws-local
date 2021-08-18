@@ -36,16 +36,11 @@ subprojects { sub ->
 	}
 
 	dependencies {
-		implementation 'org.springframework.boot:spring-boot-starter-data-r2dbc'
 		implementation 'org.springframework.boot:spring-boot-starter-webflux'
 		compileOnly 'org.projectlombok:lombok'
 		annotationProcessor 'org.projectlombok:lombok'
-		implementation group: 'com.amazonaws', name: 'aws-java-sdk', version: '1.11.1003'
 		testImplementation 'org.springframework.boot:spring-boot-starter-test'
 		testImplementation 'io.projectreactor:reactor-test'
-
-		runtimeOnly 'io.r2dbc:r2dbc-postgresql'
-		runtimeOnly 'org.postgresql:postgresql'
 	}
 }
 
