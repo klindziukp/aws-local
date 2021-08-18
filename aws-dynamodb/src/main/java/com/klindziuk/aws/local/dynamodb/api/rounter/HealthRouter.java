@@ -2,9 +2,9 @@
  * Copyright (c) 2021. Dandelion development
  */
 
-package com.klindziuk.aws.local.s3.api.rounter;
+package com.klindziuk.aws.local.dynamodb.api.rounter;
 
-import com.klindziuk.aws.local.s3.api.handler.HealthHandler;
+import com.klindziuk.aws.local.dynamodb.api.handler.HealthHandler;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.MediaType;
@@ -20,7 +20,7 @@ public class HealthRouter {
   @Bean
   public RouterFunction<ServerResponse> healthRouterFunction(HealthHandler healthHandler) {
     RequestPredicate healthRoute =
-        RequestPredicates.GET("/s3/health").and(RequestPredicates.accept(MediaType.APPLICATION_JSON));
+        RequestPredicates.GET("/health").and(RequestPredicates.accept(MediaType.APPLICATION_JSON));
 
     return RouterFunctions.route(healthRoute, healthHandler::health);
   }

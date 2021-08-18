@@ -10,4 +10,10 @@ repositories {
 }
 
 dependencies {
+    implementation group: 'com.amazonaws', name: 'aws-java-sdk', version: '1.11.1003'
+    implementation 'org.springframework.boot:spring-boot-starter-data-r2dbc'
+
+    runtimeOnly 'io.r2dbc:r2dbc-postgresql'
+    runtimeOnly 'org.postgresql:postgresql'
+
 }
