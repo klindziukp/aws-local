@@ -1,0 +1,20 @@
+config:
+  aws:
+    region: us-east-1
+    sns:
+      url: http://127.0.0.1:4566
+      access-key: localstack
+      secret-key: localstack
+      topic-name: dandelion-item-info-topic
+    sqs:
+      url: http://127.0.0.1:4566
+      access-key: localstack
+      secret-key: localstack
+      queue-name: dandelion-item-info-queue
+
+cloud:
+  aws:
+    stack:
+      auto: false
+    region:
+      static: us-east-1

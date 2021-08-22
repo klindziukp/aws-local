@@ -5,12 +5,10 @@
 package com.klindziuk.aws.local.dynamodb.api.handler;
 
 import static org.springframework.http.MediaType.APPLICATION_JSON;
-import static org.springframework.web.reactive.function.server.ServerResponse.notFound;
 import static org.springframework.web.reactive.function.server.ServerResponse.ok;
 
 import com.klindziuk.aws.local.dynamodb.constant.PathVariableParam;
 import com.klindziuk.aws.local.dynamodb.domain.ItemInfo;
-import com.klindziuk.aws.local.dynamodb.exception.UnableToFindItemInfoException;
 import com.klindziuk.aws.local.dynamodb.service.ItemInfoService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -51,15 +49,21 @@ public class AwsDynamoDbHandler {
     return request
         .bodyToMono(ItemInfo.class)
         .doOnNext(itemInfoService::saveItemInfo)
-        .flatMap(itemInfo -> ok().contentType(APPLICATION_JSON).body(Mono.just(itemInfo), ItemInfo.class));
+        .flatMap(
+            itemInfo ->
+                ok().contentType(APPLICATION_JSON).body(Mono.just(itemInfo), ItemInfo.class));
   }
 
   @NonNull
   public Mono<ServerResponse> deleteItemInfo(ServerRequest request) {
     final String itemName = request.pathVariable(PathVariableParam.ITEM_NAME);
-    return itemInfoService.getItemInfoByName(itemName).flatMap(itemInfo -> {
-      itemInfoService.deleteItemInfo(itemInfo.getItemName());
-      return ok().contentType(APPLICATION_JSON).body(Mono.just(itemInfo), ItemInfo.class);
-    }).switchIfEmpty(ServerResponse.notFound().build());
+    return itemInfoService
+        .getItemInfoByName(itemName)
+        .flatMap(
+            itemInfo -> {
+              itemInfoService.deleteItemInfo(itemInfo.getItemName());
+              return ok().contentType(APPLICATION_JSON).body(Mono.just(itemInfo), ItemInfo.class);
+            })
+        .switchIfEmpty(ServerResponse.notFound().build());
   }
 }

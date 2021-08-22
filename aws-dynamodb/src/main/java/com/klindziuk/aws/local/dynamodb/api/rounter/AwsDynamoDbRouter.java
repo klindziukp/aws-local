@@ -18,7 +18,8 @@ import org.springframework.web.reactive.function.server.ServerResponse;
 public class AwsDynamoDbRouter {
 
   @Bean
-  public RouterFunction<ServerResponse> awsDynamoDBRouterFunction(AwsDynamoDbHandler awsDynamoDbHandler) {
+  public RouterFunction<ServerResponse> awsDynamoDBRouterFunction(
+      AwsDynamoDbHandler awsDynamoDbHandler) {
     RequestPredicate saveToDynamoDb =
         RequestPredicates.POST("/dynamodb/save")
             .and(RequestPredicates.accept(MediaType.APPLICATION_JSON));
