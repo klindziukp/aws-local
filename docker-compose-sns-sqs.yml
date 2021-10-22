@@ -1,0 +1,20 @@
+version: '3.7'
+
+services:
+  localstack:
+    container_name: localstack
+    image: localstack/localstack:latest
+    environment:
+      - DEBUG=1
+      - USE_SSL=0
+      - AWS_CBOR_DISABLE=1
+      - DOCKER_HOST=unix:///var/run/docker.sock
+      - HOSTNAME=localstack
+      - SERVICES=sns,sqs
+      - AWS_DEFAULT_REGION=us-east-1
+    ports:
+      - '4566-4583:4566-4583'
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - ./files:/tmp/localstack
+      - ./script/localstack/snssqs/init-sns-sqs.sh:/docker-entrypoint-initaws.d/init-sns-sqs.sh

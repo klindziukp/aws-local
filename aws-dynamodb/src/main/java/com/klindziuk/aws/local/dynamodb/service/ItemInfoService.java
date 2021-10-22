@@ -5,7 +5,6 @@
 package com.klindziuk.aws.local.dynamodb.service;
 
 import com.klindziuk.aws.local.dynamodb.domain.ItemInfo;
-import com.klindziuk.aws.local.dynamodb.exception.UnableToFindItemInfoException;
 import com.klindziuk.aws.local.dynamodb.repository.ItemInfoRepository;
 import java.util.Objects;
 import lombok.extern.slf4j.Slf4j;

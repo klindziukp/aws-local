@@ -20,7 +20,8 @@ public class HealthRouter {
   @Bean
   public RouterFunction<ServerResponse> healthRouterFunction(HealthHandler healthHandler) {
     RequestPredicate healthRoute =
-        RequestPredicates.GET("/health").and(RequestPredicates.accept(MediaType.APPLICATION_JSON));
+        RequestPredicates.GET("/dynamodb/health")
+            .and(RequestPredicates.accept(MediaType.APPLICATION_JSON));
 
     return RouterFunctions.route(healthRoute, healthHandler::health);
   }
