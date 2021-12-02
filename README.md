@@ -1,2 +1,1 @@
-# aws-local
-Represents source code for `LocalStack` turtorials
+# Spring WebFlux AWS project for [AWS Dandelion Tutorials](https://medium.com/dandelion-tutorials/aws/home)
